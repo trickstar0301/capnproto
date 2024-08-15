@@ -691,6 +691,11 @@ void NodeTranslator::compileNode(Declaration::Reader decl, schema::Node::Builder
       break;
   }
 
+  if (decl.which() != Declaration::ANNOTATION) {
+    builder.setStartByte(decl.getStartByte());
+    builder.setEndByte(decl.getEndByte());
+  }
+
   builder.adoptAnnotations(compileAnnotationApplications(decl.getAnnotations(), targetsFlagName));
 
   auto di = sourceInfo.get();

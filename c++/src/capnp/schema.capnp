@@ -170,6 +170,9 @@ struct Node {
     }
   }
 
+  startByte @34 :UInt32;
+  endByte @35 :UInt32;
+
   struct SourceInfo {
     # Additional information about a node which is not needed at runtime, but may be useful for
     # documentation or debugging purposes. This is kept in a separate struct to make sure it
