@@ -692,8 +692,8 @@ void NodeTranslator::compileNode(Declaration::Reader decl, schema::Node::Builder
   }
 
   if (decl.which() != Declaration::ANNOTATION) {
-    builder.setStartByte(decl.getStartByte());
-    builder.setEndByte(decl.getEndByte());
+    sourceInfo.get().setStartByte(decl.getStartByte());
+    sourceInfo.get().setEndByte(decl.getEndByte());
   }
 
   builder.adoptAnnotations(compileAnnotationApplications(decl.getAnnotations(), targetsFlagName));
