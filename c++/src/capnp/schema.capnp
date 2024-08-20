@@ -196,7 +196,6 @@ struct Node {
       endByte @2 :UInt32;
     }
 
-    # TODO(someday): Record location of the declaration in the original source code.
     startByte @3 :UInt32;
     endByte @4 :UInt32;
   }
