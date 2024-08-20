@@ -1393,7 +1393,7 @@ private:
       if (member.declId.isOrdinal()) {
         dupDetector.check(member.declId.getOrdinal());
       }
-      
+
       schema::Field::Builder fieldBuilder = member.getSchema();
       fieldBuilder.getOrdinal().setExplicit(entry.first);
 
