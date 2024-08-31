@@ -23,6 +23,7 @@ CAPNP_DECLARE_SCHEMA(b9521bccf10fa3b1);
 CAPNP_DECLARE_SCHEMA(debf55bbfa0fc242);
 CAPNP_DECLARE_SCHEMA(f38e1de3041357ae);
 CAPNP_DECLARE_SCHEMA(c2ba9038898e1fa2);
+CAPNP_DECLARE_SCHEMA(a4829ecc7cb36e83);
 CAPNP_DECLARE_SCHEMA(9ea0b19b37fb4435);
 CAPNP_DECLARE_SCHEMA(b54ab3364333f598);
 CAPNP_DECLARE_SCHEMA(e82753cff0c2218f);
@@ -141,9 +142,10 @@ struct Node::SourceInfo {
   class Builder;
   class Pipeline;
   struct Member;
+  struct BytePosition;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(f38e1de3041357ae, 2, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(f38e1de3041357ae, 1, 3)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -158,7 +160,22 @@ struct Node::SourceInfo::Member {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(c2ba9038898e1fa2, 1, 1)
+    CAPNP_DECLARE_STRUCT_HEADER(c2ba9038898e1fa2, 0, 3)
+    #if !CAPNP_LITE
+    static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
+    #endif  // !CAPNP_LITE
+  };
+};
+
+struct Node::SourceInfo::BytePosition {
+  BytePosition() = delete;
+
+  class Reader;
+  class Builder;
+  class Pipeline;
+
+  struct _capnpPrivate {
+    CAPNP_DECLARE_STRUCT_HEADER(a4829ecc7cb36e83, 1, 0)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -1071,9 +1088,8 @@ public:
   inline bool hasMembers() const;
   inline  ::capnp::List< ::capnp::schema::Node::SourceInfo::Member,  ::capnp::Kind::STRUCT>::Reader getMembers() const;
 
-  inline  ::uint32_t getStartByte() const;
-
-  inline  ::uint32_t getEndByte() const;
+  inline bool hasBytePosition() const;
+  inline  ::capnp::schema::Node::SourceInfo::BytePosition::Reader getBytePosition() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1120,11 +1136,12 @@ public:
   inline void adoptMembers(::capnp::Orphan< ::capnp::List< ::capnp::schema::Node::SourceInfo::Member,  ::capnp::Kind::STRUCT>>&& value);
   inline ::capnp::Orphan< ::capnp::List< ::capnp::schema::Node::SourceInfo::Member,  ::capnp::Kind::STRUCT>> disownMembers();
 
-  inline  ::uint32_t getStartByte();
-  inline void setStartByte( ::uint32_t value);
-
-  inline  ::uint32_t getEndByte();
-  inline void setEndByte( ::uint32_t value);
+  inline bool hasBytePosition();
+  inline  ::capnp::schema::Node::SourceInfo::BytePosition::Builder getBytePosition();
+  inline void setBytePosition( ::capnp::schema::Node::SourceInfo::BytePosition::Reader value);
+  inline  ::capnp::schema::Node::SourceInfo::BytePosition::Builder initBytePosition();
+  inline void adoptBytePosition(::capnp::Orphan< ::capnp::schema::Node::SourceInfo::BytePosition>&& value);
+  inline ::capnp::Orphan< ::capnp::schema::Node::SourceInfo::BytePosition> disownBytePosition();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1144,6 +1161,7 @@ public:
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
       : _typeless(kj::mv(typeless)) {}
 
+  inline  ::capnp::schema::Node::SourceInfo::BytePosition::Pipeline getBytePosition();
 private:
   ::capnp::AnyPointer::Pipeline _typeless;
   friend class ::capnp::PipelineHook;
@@ -1172,9 +1190,11 @@ public:
   inline bool hasDocComment() const;
   inline  ::capnp::Text::Reader getDocComment() const;
 
-  inline  ::uint32_t getStartByte() const;
+  inline bool hasBytePosition() const;
+  inline  ::capnp::schema::Node::SourceInfo::BytePosition::Reader getBytePosition() const;
 
-  inline  ::uint32_t getEndByte() const;
+  inline bool hasBrandBytePositions() const;
+  inline  ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>::Reader getBrandBytePositions() const;
 
 private:
   ::capnp::_::StructReader _reader;
@@ -1211,6 +1231,96 @@ public:
   inline void adoptDocComment(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownDocComment();
 
+  inline bool hasBytePosition();
+  inline  ::capnp::schema::Node::SourceInfo::BytePosition::Builder getBytePosition();
+  inline void setBytePosition( ::capnp::schema::Node::SourceInfo::BytePosition::Reader value);
+  inline  ::capnp::schema::Node::SourceInfo::BytePosition::Builder initBytePosition();
+  inline void adoptBytePosition(::capnp::Orphan< ::capnp::schema::Node::SourceInfo::BytePosition>&& value);
+  inline ::capnp::Orphan< ::capnp::schema::Node::SourceInfo::BytePosition> disownBytePosition();
+
+  inline bool hasBrandBytePositions();
+  inline  ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>::Builder getBrandBytePositions();
+  inline void setBrandBytePositions( ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>::Reader value);
+  inline  ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>::Builder initBrandBytePositions(unsigned int size);
+  inline void adoptBrandBytePositions(::capnp::Orphan< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>>&& value);
+  inline ::capnp::Orphan< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>> disownBrandBytePositions();
+
+private:
+  ::capnp::_::StructBuilder _builder;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  friend class ::capnp::Orphanage;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+};
+
+#if !CAPNP_LITE
+class Node::SourceInfo::Member::Pipeline {
+public:
+  typedef Member Pipelines;
+
+  inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
+  inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
+      : _typeless(kj::mv(typeless)) {}
+
+  inline  ::capnp::schema::Node::SourceInfo::BytePosition::Pipeline getBytePosition();
+private:
+  ::capnp::AnyPointer::Pipeline _typeless;
+  friend class ::capnp::PipelineHook;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+};
+#endif  // !CAPNP_LITE
+
+class Node::SourceInfo::BytePosition::Reader {
+public:
+  typedef BytePosition Reads;
+
+  Reader() = default;
+  inline explicit Reader(::capnp::_::StructReader base): _reader(base) {}
+
+  inline ::capnp::MessageSize totalSize() const {
+    return _reader.totalSize().asPublic();
+  }
+
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const {
+    return ::capnp::_::structString(_reader, *_capnpPrivate::brand());
+  }
+#endif  // !CAPNP_LITE
+
+  inline  ::uint32_t getStartByte() const;
+
+  inline  ::uint32_t getEndByte() const;
+
+private:
+  ::capnp::_::StructReader _reader;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::ToDynamic_;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::_::PointerHelpers;
+  template <typename, ::capnp::Kind>
+  friend struct ::capnp::List;
+  friend class ::capnp::MessageBuilder;
+  friend class ::capnp::Orphanage;
+};
+
+class Node::SourceInfo::BytePosition::Builder {
+public:
+  typedef BytePosition Builds;
+
+  Builder() = delete;  // Deleted to discourage incorrect usage.
+                       // You can explicitly initialize to nullptr instead.
+  inline Builder(decltype(nullptr)) {}
+  inline explicit Builder(::capnp::_::StructBuilder base): _builder(base) {}
+  inline operator Reader() const { return Reader(_builder.asReader()); }
+  inline Reader asReader() const { return *this; }
+
+  inline ::capnp::MessageSize totalSize() const { return asReader().totalSize(); }
+#if !CAPNP_LITE
+  inline ::kj::StringTree toString() const { return asReader().toString(); }
+#endif  // !CAPNP_LITE
+
   inline  ::uint32_t getStartByte();
   inline void setStartByte( ::uint32_t value);
 
@@ -1227,9 +1337,9 @@ private:
 };
 
 #if !CAPNP_LITE
-class Node::SourceInfo::Member::Pipeline {
+class Node::SourceInfo::BytePosition::Pipeline {
 public:
-  typedef Member Pipelines;
+  typedef BytePosition Pipelines;
 
   inline Pipeline(decltype(nullptr)): _typeless(nullptr) {}
   inline explicit Pipeline(::capnp::AnyPointer::Pipeline&& typeless)
@@ -4865,32 +4975,43 @@ inline ::capnp::Orphan< ::capnp::List< ::capnp::schema::Node::SourceInfo::Member
       ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
-inline  ::uint32_t Node::SourceInfo::Reader::getStartByte() const {
-  return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+inline bool Node::SourceInfo::Reader::hasBytePosition() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
-
-inline  ::uint32_t Node::SourceInfo::Builder::getStartByte() {
-  return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS);
+inline bool Node::SourceInfo::Builder::hasBytePosition() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
 }
-inline void Node::SourceInfo::Builder::setStartByte( ::uint32_t value) {
-  _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<2>() * ::capnp::ELEMENTS, value);
+inline  ::capnp::schema::Node::SourceInfo::BytePosition::Reader Node::SourceInfo::Reader::getBytePosition() const {
+  return ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
-
-inline  ::uint32_t Node::SourceInfo::Reader::getEndByte() const {
-  return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+inline  ::capnp::schema::Node::SourceInfo::BytePosition::Builder Node::SourceInfo::Builder::getBytePosition() {
+  return ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
-
-inline  ::uint32_t Node::SourceInfo::Builder::getEndByte() {
-  return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS);
+#if !CAPNP_LITE
+inline  ::capnp::schema::Node::SourceInfo::BytePosition::Pipeline Node::SourceInfo::Pipeline::getBytePosition() {
+  return  ::capnp::schema::Node::SourceInfo::BytePosition::Pipeline(_typeless.getPointerField(2));
 }
-inline void Node::SourceInfo::Builder::setEndByte( ::uint32_t value) {
-  _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<3>() * ::capnp::ELEMENTS, value);
+#endif  // !CAPNP_LITE
+inline void Node::SourceInfo::Builder::setBytePosition( ::capnp::schema::Node::SourceInfo::BytePosition::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::schema::Node::SourceInfo::BytePosition::Builder Node::SourceInfo::Builder::initBytePosition() {
+  return ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void Node::SourceInfo::Builder::adoptBytePosition(
+    ::capnp::Orphan< ::capnp::schema::Node::SourceInfo::BytePosition>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::schema::Node::SourceInfo::BytePosition> Node::SourceInfo::Builder::disownBytePosition() {
+  return ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
 }
 
 inline bool Node::SourceInfo::Member::Reader::hasDocComment() const {
@@ -4927,30 +5048,103 @@ inline ::capnp::Orphan< ::capnp::Text> Node::SourceInfo::Member::Builder::disown
       ::capnp::bounded<0>() * ::capnp::POINTERS));
 }
 
-inline  ::uint32_t Node::SourceInfo::Member::Reader::getStartByte() const {
+inline bool Node::SourceInfo::Member::Reader::hasBytePosition() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline bool Node::SourceInfo::Member::Builder::hasBytePosition() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::schema::Node::SourceInfo::BytePosition::Reader Node::SourceInfo::Member::Reader::getBytePosition() const {
+  return ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::get(_reader.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline  ::capnp::schema::Node::SourceInfo::BytePosition::Builder Node::SourceInfo::Member::Builder::getBytePosition() {
+  return ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::get(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+#if !CAPNP_LITE
+inline  ::capnp::schema::Node::SourceInfo::BytePosition::Pipeline Node::SourceInfo::Member::Pipeline::getBytePosition() {
+  return  ::capnp::schema::Node::SourceInfo::BytePosition::Pipeline(_typeless.getPointerField(1));
+}
+#endif  // !CAPNP_LITE
+inline void Node::SourceInfo::Member::Builder::setBytePosition( ::capnp::schema::Node::SourceInfo::BytePosition::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::set(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::schema::Node::SourceInfo::BytePosition::Builder Node::SourceInfo::Member::Builder::initBytePosition() {
+  return ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::init(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+inline void Node::SourceInfo::Member::Builder::adoptBytePosition(
+    ::capnp::Orphan< ::capnp::schema::Node::SourceInfo::BytePosition>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::adopt(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::schema::Node::SourceInfo::BytePosition> Node::SourceInfo::Member::Builder::disownBytePosition() {
+  return ::capnp::_::PointerHelpers< ::capnp::schema::Node::SourceInfo::BytePosition>::disown(_builder.getPointerField(
+      ::capnp::bounded<1>() * ::capnp::POINTERS));
+}
+
+inline bool Node::SourceInfo::Member::Reader::hasBrandBytePositions() const {
+  return !_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline bool Node::SourceInfo::Member::Builder::hasBrandBytePositions() {
+  return !_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS).isNull();
+}
+inline  ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>::Reader Node::SourceInfo::Member::Reader::getBrandBytePositions() const {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>>::get(_reader.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline  ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>::Builder Node::SourceInfo::Member::Builder::getBrandBytePositions() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>>::get(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+inline void Node::SourceInfo::Member::Builder::setBrandBytePositions( ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>::Reader value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>>::set(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), value);
+}
+inline  ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>::Builder Node::SourceInfo::Member::Builder::initBrandBytePositions(unsigned int size) {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>>::init(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), size);
+}
+inline void Node::SourceInfo::Member::Builder::adoptBrandBytePositions(
+    ::capnp::Orphan< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>>&& value) {
+  ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>>::adopt(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS), kj::mv(value));
+}
+inline ::capnp::Orphan< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>> Node::SourceInfo::Member::Builder::disownBrandBytePositions() {
+  return ::capnp::_::PointerHelpers< ::capnp::List< ::capnp::schema::Node::SourceInfo::BytePosition,  ::capnp::Kind::STRUCT>>::disown(_builder.getPointerField(
+      ::capnp::bounded<2>() * ::capnp::POINTERS));
+}
+
+inline  ::uint32_t Node::SourceInfo::BytePosition::Reader::getStartByte() const {
   return _reader.getDataField< ::uint32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
 
-inline  ::uint32_t Node::SourceInfo::Member::Builder::getStartByte() {
+inline  ::uint32_t Node::SourceInfo::BytePosition::Builder::getStartByte() {
   return _builder.getDataField< ::uint32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS);
 }
-inline void Node::SourceInfo::Member::Builder::setStartByte( ::uint32_t value) {
+inline void Node::SourceInfo::BytePosition::Builder::setStartByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
       ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
 }
 
-inline  ::uint32_t Node::SourceInfo::Member::Reader::getEndByte() const {
+inline  ::uint32_t Node::SourceInfo::BytePosition::Reader::getEndByte() const {
   return _reader.getDataField< ::uint32_t>(
       ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
 
-inline  ::uint32_t Node::SourceInfo::Member::Builder::getEndByte() {
+inline  ::uint32_t Node::SourceInfo::BytePosition::Builder::getEndByte() {
   return _builder.getDataField< ::uint32_t>(
       ::capnp::bounded<1>() * ::capnp::ELEMENTS);
 }
-inline void Node::SourceInfo::Member::Builder::setEndByte( ::uint32_t value) {
+inline void Node::SourceInfo::BytePosition::Builder::setEndByte( ::uint32_t value) {
   _builder.setDataField< ::uint32_t>(
       ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
 }

@@ -698,8 +698,8 @@ void NodeTranslator::compileNode(Declaration::Reader decl, schema::Node::Builder
   if (decl.hasDocComment()) {
     di.setDocComment(decl.getDocComment());
   }
-  di.setStartByte(decl.getStartByte());
-  di.setEndByte(decl.getEndByte());
+  di.getBytePosition().setStartByte(decl.getStartByte());
+  di.getBytePosition().setEndByte(decl.getEndByte());
 }
 
 static kj::StringPtr getExpressionTargetName(Expression::Reader exp) {
@@ -940,8 +940,8 @@ void NodeTranslator::compileEnum(Void decl,
     if (enumerantDecl.hasDocComment()) {
       sourceInfoList[i].setDocComment(enumerantDecl.getDocComment());
     }
-    sourceInfoList[i].setStartByte(enumerantDecl.getStartByte());
-    sourceInfoList[i].setEndByte(enumerantDecl.getEndByte());
+    sourceInfoList[i].getBytePosition().setStartByte(enumerantDecl.getStartByte());
+    sourceInfoList[i].getBytePosition().setEndByte(enumerantDecl.getEndByte());
 
     auto enumerantBuilder = list[i++];
     enumerantBuilder.setName(enumerantDecl.getName().getValue());
@@ -981,8 +981,8 @@ public:
     for (auto& entry : membersByOrdinal) {
       uint index = entry.first;
       MemberInfo* memberInfo = entry.second;
-      sourceInfoMembers[index].setStartByte(memberInfo->startByte);
-      sourceInfoMembers[index].setEndByte(memberInfo->endByte);
+      sourceInfoMembers[index].getBytePosition().setStartByte(memberInfo->startByte);
+      sourceInfoMembers[index].getBytePosition().setEndByte(memberInfo->endByte);
     }
   }
 
@@ -1131,8 +1131,8 @@ private:
         KJ_IF_MAYBE(dc, docComment) {
           builderPair.sourceInfo.setDocComment(*dc);
         }
-        builderPair.sourceInfo.setStartByte(startByte);
-        builderPair.sourceInfo.setEndByte(endByte);
+        builderPair.sourceInfo.getBytePosition().setStartByte(startByte);
+        builderPair.sourceInfo.getBytePosition().setEndByte(endByte);
 
         schema = builder;
         return builder;
@@ -1184,8 +1184,8 @@ private:
         KJ_IF_MAYBE(dc, docComment) {
           sourceInfo.setDocComment(*dc);
         }
-        sourceInfo.setStartByte(startByte);
-        sourceInfo.setEndByte(endByte);
+        sourceInfo.getBytePosition().setStartByte(startByte);
+        sourceInfo.getBytePosition().setEndByte(endByte);
       }
     }
   };
@@ -1600,8 +1600,8 @@ void NodeTranslator::compileInterface(Declaration::Interface::Reader decl,
     if (methodDecl.hasDocComment()) {
       sourceInfoList[i].setDocComment(methodDecl.getDocComment());
     }
-    sourceInfoList[i].setStartByte(methodDecl.getStartByte());
-    sourceInfoList[i].setEndByte(methodDecl.getEndByte());
+    sourceInfoList[i].getBytePosition().setStartByte(methodDecl.getStartByte());
+    sourceInfoList[i].getBytePosition().setEndByte(methodDecl.getEndByte());
 
     auto methodBuilder = list[i++];
     methodBuilder.setName(methodDecl.getName().getValue());

@@ -192,12 +192,16 @@ struct Node {
     struct Member {
       docComment @0 :Text;
       # Doc comment on the member.
-      startByte @1 :UInt32;
-      endByte @2 :UInt32;
+      bytePosition @1 :BytePosition;
+      brandBytePositions @2 :List(BytePosition);
     }
 
-    startByte @3 :UInt32;
-    endByte @4 :UInt32;
+    bytePosition @3 :BytePosition;
+
+    struct BytePosition {
+      startByte @0 :UInt32;
+      endByte @1 :UInt32;
+    }
   }
 }
 
