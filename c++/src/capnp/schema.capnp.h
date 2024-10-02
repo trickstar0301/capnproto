@@ -97,7 +97,7 @@ struct Node {
   struct Annotation;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e682ab4cf923a417, 6, 6)
+    CAPNP_DECLARE_STRUCT_HEADER(e682ab4cf923a417, 5, 6)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -158,7 +158,7 @@ struct Node::SourceInfo::Member {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(c2ba9038898e1fa2, 1, 2)
+    CAPNP_DECLARE_STRUCT_HEADER(c2ba9038898e1fa2, 0, 1)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -173,7 +173,7 @@ struct Node::Struct {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(9ea0b19b37fb4435, 6, 6)
+    CAPNP_DECLARE_STRUCT_HEADER(9ea0b19b37fb4435, 5, 6)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -188,7 +188,7 @@ struct Node::Enum {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b54ab3364333f598, 6, 6)
+    CAPNP_DECLARE_STRUCT_HEADER(b54ab3364333f598, 5, 6)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -203,7 +203,7 @@ struct Node::Interface {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(e82753cff0c2218f, 6, 6)
+    CAPNP_DECLARE_STRUCT_HEADER(e82753cff0c2218f, 5, 6)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -218,7 +218,7 @@ struct Node::Const {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(b18aa5ac7a0d9420, 6, 6)
+    CAPNP_DECLARE_STRUCT_HEADER(b18aa5ac7a0d9420, 5, 6)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -233,7 +233,7 @@ struct Node::Annotation {
   class Pipeline;
 
   struct _capnpPrivate {
-    CAPNP_DECLARE_STRUCT_HEADER(ec1619d4400a0290, 6, 6)
+    CAPNP_DECLARE_STRUCT_HEADER(ec1619d4400a0290, 5, 6)
     #if !CAPNP_LITE
     static constexpr ::capnp::_::RawBrandedSchema const* brand() { return &schema->defaultBrand; }
     #endif  // !CAPNP_LITE
@@ -760,10 +760,6 @@ public:
 
   inline bool getIsGeneric() const;
 
-  inline  ::uint32_t getStartByte() const;
-
-  inline  ::uint32_t getEndByte() const;
-
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -856,12 +852,6 @@ public:
 
   inline bool getIsGeneric();
   inline void setIsGeneric(bool value);
-
-  inline  ::uint32_t getStartByte();
-  inline void setStartByte( ::uint32_t value);
-
-  inline  ::uint32_t getEndByte();
-  inline void setEndByte( ::uint32_t value);
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -1172,13 +1162,6 @@ public:
   inline bool hasDocComment() const;
   inline  ::capnp::Text::Reader getDocComment() const;
 
-  inline  ::uint32_t getStartByte() const;
-
-  inline  ::uint32_t getEndByte() const;
-
-  inline bool hasTypeId() const;
-  inline  ::capnp::Text::Reader getTypeId() const;
-
 private:
   ::capnp::_::StructReader _reader;
   template <typename, ::capnp::Kind>
@@ -1213,19 +1196,6 @@ public:
   inline  ::capnp::Text::Builder initDocComment(unsigned int size);
   inline void adoptDocComment(::capnp::Orphan< ::capnp::Text>&& value);
   inline ::capnp::Orphan< ::capnp::Text> disownDocComment();
-
-  inline  ::uint32_t getStartByte();
-  inline void setStartByte( ::uint32_t value);
-
-  inline  ::uint32_t getEndByte();
-  inline void setEndByte( ::uint32_t value);
-
-  inline bool hasTypeId();
-  inline  ::capnp::Text::Builder getTypeId();
-  inline void setTypeId( ::capnp::Text::Reader value);
-  inline  ::capnp::Text::Builder initTypeId(unsigned int size);
-  inline void adoptTypeId(::capnp::Orphan< ::capnp::Text>&& value);
-  inline ::capnp::Orphan< ::capnp::Text> disownTypeId();
 
 private:
   ::capnp::_::StructBuilder _builder;
@@ -4711,34 +4681,6 @@ inline void Node::Builder::setIsGeneric(bool value) {
       ::capnp::bounded<288>() * ::capnp::ELEMENTS, value);
 }
 
-inline  ::uint32_t Node::Reader::getStartByte() const {
-  return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<10>() * ::capnp::ELEMENTS);
-}
-
-inline  ::uint32_t Node::Builder::getStartByte() {
-  return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<10>() * ::capnp::ELEMENTS);
-}
-inline void Node::Builder::setStartByte( ::uint32_t value) {
-  _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<10>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::uint32_t Node::Reader::getEndByte() const {
-  return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<11>() * ::capnp::ELEMENTS);
-}
-
-inline  ::uint32_t Node::Builder::getEndByte() {
-  return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<11>() * ::capnp::ELEMENTS);
-}
-inline void Node::Builder::setEndByte( ::uint32_t value) {
-  _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<11>() * ::capnp::ELEMENTS, value);
-}
-
 inline bool Node::Parameter::Reader::hasName() const {
   return !_reader.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS).isNull();
@@ -4935,68 +4877,6 @@ inline void Node::SourceInfo::Member::Builder::adoptDocComment(
 inline ::capnp::Orphan< ::capnp::Text> Node::SourceInfo::Member::Builder::disownDocComment() {
   return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
       ::capnp::bounded<0>() * ::capnp::POINTERS));
-}
-
-inline  ::uint32_t Node::SourceInfo::Member::Reader::getStartByte() const {
-  return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-
-inline  ::uint32_t Node::SourceInfo::Member::Builder::getStartByte() {
-  return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS);
-}
-inline void Node::SourceInfo::Member::Builder::setStartByte( ::uint32_t value) {
-  _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<0>() * ::capnp::ELEMENTS, value);
-}
-
-inline  ::uint32_t Node::SourceInfo::Member::Reader::getEndByte() const {
-  return _reader.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
-}
-
-inline  ::uint32_t Node::SourceInfo::Member::Builder::getEndByte() {
-  return _builder.getDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS);
-}
-inline void Node::SourceInfo::Member::Builder::setEndByte( ::uint32_t value) {
-  _builder.setDataField< ::uint32_t>(
-      ::capnp::bounded<1>() * ::capnp::ELEMENTS, value);
-}
-
-inline bool Node::SourceInfo::Member::Reader::hasTypeId() const {
-  return !_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
-}
-inline bool Node::SourceInfo::Member::Builder::hasTypeId() {
-  return !_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS).isNull();
-}
-inline  ::capnp::Text::Reader Node::SourceInfo::Member::Reader::getTypeId() const {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_reader.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-inline  ::capnp::Text::Builder Node::SourceInfo::Member::Builder::getTypeId() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::get(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
-}
-inline void Node::SourceInfo::Member::Builder::setTypeId( ::capnp::Text::Reader value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::set(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), value);
-}
-inline  ::capnp::Text::Builder Node::SourceInfo::Member::Builder::initTypeId(unsigned int size) {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::init(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), size);
-}
-inline void Node::SourceInfo::Member::Builder::adoptTypeId(
-    ::capnp::Orphan< ::capnp::Text>&& value) {
-  ::capnp::_::PointerHelpers< ::capnp::Text>::adopt(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS), kj::mv(value));
-}
-inline ::capnp::Orphan< ::capnp::Text> Node::SourceInfo::Member::Builder::disownTypeId() {
-  return ::capnp::_::PointerHelpers< ::capnp::Text>::disown(_builder.getPointerField(
-      ::capnp::bounded<1>() * ::capnp::POINTERS));
 }
 
 inline  ::uint16_t Node::Struct::Reader::getDataWordCount() const {
