@@ -192,8 +192,6 @@ struct Node {
     struct Member {
       docComment @0 :Text;
       # Doc comment on the member.
-      startByte @1 :UInt32;
-      endByte @2 :UInt32;
     }
 
     # TODO(someday): Record location of the declaration in the original source code.

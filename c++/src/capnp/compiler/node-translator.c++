@@ -942,9 +942,6 @@ void NodeTranslator::compileEnum(Void decl,
     if (enumerantDecl.hasDocComment()) {
       sourceInfoList[i].setDocComment(enumerantDecl.getDocComment());
     }
-    // Add byte position to sourceInfo of Enum
-    sourceInfoList[i].setStartByte(enumerantDecl.getStartByte());
-    sourceInfoList[i].setEndByte(enumerantDecl.getEndByte());
 
     auto enumerantBuilder = list[i++];
     enumerantBuilder.setName(enumerantDecl.getName().getValue());
@@ -977,17 +974,6 @@ public:
     MemberInfo root(builder, sourceInfo);
     traverseParams(params, root, layout.getTop());
     translateInternal(root, builder);
-    sourceInfo.setId(builder.getId());
-    // ParameterListがStructにおけるSourceInfoのMemberのbyte positionを設定
-    // TODO: seperate function
-    auto sourceInfoMembers = sourceInfo.initMembers(params.size());
-    for (auto& entry : membersByOrdinal) {
-      uint index = entry.first;
-      MemberInfo* memberInfo = entry.second;
-      
-      sourceInfoMembers[index].setStartByte(memberInfo->startByte);
-      sourceInfoMembers[index].setEndByte(memberInfo->endByte);
-    }
   }
 
 private:
@@ -1135,9 +1121,6 @@ private:
         KJ_IF_MAYBE(dc, docComment) {
           builderPair.sourceInfo.setDocComment(*dc);
         }
-        // ユーザーに見せる値を設定
-        builderPair.sourceInfo.setStartByte(startByte);
-        builderPair.sourceInfo.setEndByte(endByte);
 
         schema = builder;
         return builder;
@@ -1385,7 +1368,7 @@ private:
 
   void translateInternal(MemberInfo& root, schema::Node::Builder builder) {
     auto structBuilder = builder.initStruct();
-    
+
     // Go through each member in ordinal order, building each member schema.
     DuplicateOrdinalDetector dupDetector(errorReporter);
     for (auto& entry: membersByOrdinal) {
@@ -1398,7 +1381,7 @@ private:
       if (member.declId.isOrdinal()) {
         dupDetector.check(member.declId.getOrdinal());
       }
-      
+
       schema::Field::Builder fieldBuilder = member.getSchema();
       fieldBuilder.getOrdinal().setExplicit(entry.first);
 
@@ -1605,8 +1588,6 @@ void NodeTranslator::compileInterface(Declaration::Interface::Reader decl,
     if (methodDecl.hasDocComment()) {
       sourceInfoList[i].setDocComment(methodDecl.getDocComment());
     }
-    sourceInfoList[i].setStartByte(methodDecl.getStartByte());
-    sourceInfoList[i].setEndByte(methodDecl.getEndByte());
 
     auto methodBuilder = list[i++];
     methodBuilder.setName(methodDecl.getName().getValue());
