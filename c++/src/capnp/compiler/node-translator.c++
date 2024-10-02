@@ -691,16 +691,17 @@ void NodeTranslator::compileNode(Declaration::Reader decl, schema::Node::Builder
       break;
   }
 
+  if (decl.which() != Declaration::ANNOTATION) {
+    sourceInfo.get().setStartByte(decl.getStartByte());
+    sourceInfo.get().setEndByte(decl.getEndByte());
+  }
+
   builder.adoptAnnotations(compileAnnotationApplications(decl.getAnnotations(), targetsFlagName));
 
   auto di = sourceInfo.get();
   di.setId(wipNode.getReader().getId());
   if (decl.hasDocComment()) {
     di.setDocComment(decl.getDocComment());
-  }
-  if (decl.which() != Declaration::ANNOTATION) {
-    di.setStartByte(decl.getStartByte());
-    di.setEndByte(decl.getEndByte());
   }
 }
 
@@ -1172,8 +1173,6 @@ private:
         KJ_IF_MAYBE(dc, docComment) {
           sourceInfo.setDocComment(*dc);
         }
-        sourceInfo.setStartByte(startByte);
-        sourceInfo.setEndByte(endByte);
       }
     }
   };
