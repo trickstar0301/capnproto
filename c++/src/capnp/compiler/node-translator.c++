@@ -698,8 +698,10 @@ void NodeTranslator::compileNode(Declaration::Reader decl, schema::Node::Builder
   if (decl.hasDocComment()) {
     di.setDocComment(decl.getDocComment());
   }
-  di.setStartByte(decl.getStartByte());
-  di.setEndByte(decl.getEndByte());
+  if (decl.which() != Declaration::ANNOTATION) {
+    di.setStartByte(decl.getStartByte());
+    di.setEndByte(decl.getEndByte());
+  }
 }
 
 static kj::StringPtr getExpressionTargetName(Expression::Reader exp) {
