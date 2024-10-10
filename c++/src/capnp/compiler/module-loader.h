@@ -52,9 +52,6 @@ public:
   void setFileIdsRequired(bool value);
   // Same as SchemaParser::setFileIdsRequired(). If set false, files will not be required to have
   // a top-level file ID; if missing a random one will be assigned.
-
-  void reportResolution(uint32_t startByte, uint32_t endByte, uint64_t typeId);
-
 private:
   class Impl;
   kj::Own<Impl> impl;

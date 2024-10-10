@@ -139,14 +139,12 @@ public:
 
   void setFileIdsRequired(bool value) { fileIdsRequired = value; }
   bool areFileIdsRequired() { return fileIdsRequired; }
-  void reportResolution(uint32_t startByte, uint32_t endByte, uint64_t typeId);
-  
+
 private:
   GlobalErrorReporter& errorReporter;
   kj::Vector<const kj::ReadableDirectory*> searchPath;
   std::unordered_map<FileKey, kj::Own<Module>, FileKeyHash> modules;
   bool fileIdsRequired = true;
-  kj::Vector<schema::CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Reader> resolutions;
 };
 
 class ModuleLoader::ModuleImpl final: public Module {
@@ -209,6 +207,18 @@ public:
     return loader.getErrorReporter().hadErrors();
   }
 
+  void reportResolution(uint32_t startByte, uint32_t endByte, uint64_t typeId) override{
+    Resolution resolution;
+    resolution.startByte = startByte;
+    resolution.endByte = endByte;
+    resolution.target = Resolution::Type{typeId};
+    resolutions.add(kj::mv(resolution));
+  }
+
+  kj::ArrayPtr<const Resolution> getResolutions() override {
+    return resolutions.asPtr();
+  }
+
 private:
   ModuleLoader::Impl& loader;
   kj::Own<const kj::ReadableFile> file;
@@ -218,7 +228,7 @@ private:
 
   kj::SpaceFor<LineBreakTable> lineBreaksSpace;
   kj::Maybe<kj::Own<LineBreakTable>> lineBreaks;
-  kj::Vector<schema::CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier::Reader> resolutions;
+  kj::Vector<Resolution> resolutions;
 };
 
 // =======================================================================================
@@ -275,14 +285,6 @@ kj::Maybe<kj::Array<const byte>> ModuleLoader::Impl::readEmbedFromSearchPath(kj:
   return nullptr;
 }
 
-void ModuleLoader::Impl::reportResolution(uint32_t startByte, uint32_t endByte, uint64_t typeId) {
-  auto identifier = kj::heap<capnp::MallocMessageBuilder>().get()->initRoot<schema::CodeGeneratorRequest::RequestedFile::FileSourceInfo::Identifier>();
-  identifier.setStartByte(startByte);
-  identifier.setEndByte(endByte);
-  identifier.setTypeId(typeId);
-  resolutions.add(identifier.asReader());
-}
-
 // =======================================================================================
 
 ModuleLoader::ModuleLoader(GlobalErrorReporter& errorReporter)
@@ -300,11 +302,6 @@ kj::Maybe<Module&> ModuleLoader::loadModule(const kj::ReadableDirectory& dir, kj
 void ModuleLoader::setFileIdsRequired(bool value) {
   return impl->setFileIdsRequired(value);
 }
-
-void ModuleLoader::reportResolution(uint32_t startByte, uint32_t endByte, uint64_t typeId) {
-  return impl->reportResolution(startByte, endByte, typeId);
-}
-
 
 }  // namespace compiler
 }  // namespace capnp
