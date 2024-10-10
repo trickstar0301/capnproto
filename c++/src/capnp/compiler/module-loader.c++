@@ -304,4 +304,4 @@ void ModuleLoader::setFileIdsRequired(bool value) {
 }
 
 }  // namespace compiler
-}  // namespace capnp
+}  // namespace capnp 

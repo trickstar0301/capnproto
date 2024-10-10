@@ -52,6 +52,7 @@ public:
   void setFileIdsRequired(bool value);
   // Same as SchemaParser::setFileIdsRequired(). If set false, files will not be required to have
   // a top-level file ID; if missing a random one will be assigned.
+  
 private:
   class Impl;
   kj::Own<Impl> impl;
