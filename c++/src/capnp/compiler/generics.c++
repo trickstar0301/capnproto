@@ -657,4 +657,4 @@ kj::Maybe<BrandedDecl> BrandScope::compileDeclExpression(
 }
 
 }  // namespace compiler
-}  // namespace capnp 
+}  // namespace capnp
