@@ -55,7 +55,12 @@ public:
   // allow the compiler to bail out entirely if it gets confused and thinks this could be because
   // of previous errors.
 
-  virtual void reportResolution(uint32_t startByte, uint32_t endByte, uint64_t typeId){};
+  virtual void reportResolution(uint32_t startByte, uint32_t endByte, uint64_t typeId) {};
+  // Report that an identifier parsed from the input resolved to a particular declaration. This may
+  // be useful, for example, to implement a jump-to-definition in a code editor.
+  //
+  // This is not an error, but is reported through ErrorReporter because ErrorReporter tends to be
+  // passed to all the right places to collect this information.
 };
 
 class GlobalErrorReporter {
