@@ -26,11 +26,25 @@
 #include <kj/exception.h>
 #include <kj/vector.h>
 #include <kj/filesystem.h>
+#include <kj/one-of.h>
 
 CAPNP_BEGIN_HEADER
 
 namespace capnp {
 namespace compiler {
+
+struct Resolution {
+  uint32_t startByte;
+  uint32_t endByte;
+
+  struct Type { uint64_t typeId; };
+  struct Member {
+    uint64_t parentTypeId;
+    uint16_t ordinal;
+  };
+
+  kj::OneOf<Type, Member> target;
+};
 
 class ErrorReporter {
   // Callback for reporting errors within a particular file.
@@ -55,7 +69,7 @@ public:
   // allow the compiler to bail out entirely if it gets confused and thinks this could be because
   // of previous errors.
 
-  virtual void reportResolution(uint32_t startByte, uint32_t endByte, uint64_t typeId) {};
+  virtual void reportResolution(Resolution resolution) {};
   // Report that an identifier parsed from the input resolved to a particular declaration. This may
   // be useful, for example, to implement a jump-to-definition in a code editor.
   //

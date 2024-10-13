@@ -32,18 +32,7 @@ CAPNP_BEGIN_HEADER
 namespace capnp {
 namespace compiler {
 
-struct Resolution {
-  uint32_t startByte;
-  uint32_t endByte;
 
-  struct Type { uint64_t typeId; };
-  struct Member {
-    uint64_t parentTypeId;
-    uint16_t ordinal;
-  };
-
-  kj::OneOf<Type, Member> target;
-};
 
 class Module: public ErrorReporter {
 public:

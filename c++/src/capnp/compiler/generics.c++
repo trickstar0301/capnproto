@@ -566,7 +566,11 @@ kj::Maybe<BrandedDecl> BrandScope::compileDeclExpression(
       KJ_IF_MAYBE(r, resolver.resolve(nameValue)) {
         auto result = interpretResolve(resolver, *r, source);
         if (r->is<Resolver::ResolvedDecl>()){
-          errorReporter.reportResolution(source.getStartByte(), source.getEndByte(), r->get<Resolver::ResolvedDecl>().id);
+          errorReporter.reportResolution(Resolution {
+            .startByte = source.getStartByte(),
+            .endByte = source.getEndByte(),
+            .target = Resolution::Type { r->get<Resolver::ResolvedDecl>().id },
+          });
         }
         return kj::mv(result);
       } else {
